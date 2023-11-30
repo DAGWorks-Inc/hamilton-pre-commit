@@ -1,0 +1,6 @@
+- id: hamilton-view-dag
+  name: Hamilton View DAG
+  description: This hook generates a visualization of the Hamilton DAG.
+  entry: view_dag
+  language: python
+  stages: [commit, manual]
