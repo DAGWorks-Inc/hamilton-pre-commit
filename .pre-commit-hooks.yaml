@@ -3,4 +3,5 @@
   description: This hook generates a visualization of the Hamilton DAG.
   entry: view_dag
   language: python
+  types: [python]
   stages: [commit, manual]
