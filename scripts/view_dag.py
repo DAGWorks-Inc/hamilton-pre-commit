@@ -8,7 +8,9 @@ from typing import Optional, Sequence
 
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
-from hamilton import driver
+from hamilton import driver, telemetry
+
+telemetry.disable_telemetry()
 
 
 PASS = 0
