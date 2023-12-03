@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "hamilton_hooks"
+version = "0.0.4"
+description = "pre-commit hooks for Hamilton."
+authors = ["Thierry Jean"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/zilto/hamilton-pre-commit-hooks/"
+repository = "https://github.com/zilto/hamilton-pre-commit-hooks/"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pillow = ">=10.1.0"
+sf-hamilton = { version = ">=1.39.0", extras = ["visualization"] }
+
+[tool.poetry.dev-dependencies]
+pytest = ">=7.4.3"
+
+[tool.poetry.scripts]
+hamilton-view-dag = "hamilton_hooks.view_dag:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
