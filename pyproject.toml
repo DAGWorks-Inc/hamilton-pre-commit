@@ -18,6 +18,7 @@ pytest = ">=7.4.3"
 
 [tool.poetry.scripts]
 hamilton-view-dag = "hamilton_hooks.view_dag:main"
+hamilton-validate-dag = "hamilton_hooks.validate_dag:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
