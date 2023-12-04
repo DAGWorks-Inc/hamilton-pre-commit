@@ -5,7 +5,7 @@ This repository contains [pre-commit hooks](https://github.com/pre-commit/pre-co
 ### Using pre-commit-hooks with pre-commit
 Install [pre-commit](https://github.com/pre-commit/pre-commit) and add this to your `.pre-commit-config.yaml`
 ```yaml
-- repo: https://github.com/zilto/hamilton-pre-commit-hooks
+- repo: https://github.com/zilto/hamilton-hooks
   rev: v0.0.3  # Use the ref you want to point at
   hooks:
     - id: hamilton-view-dag
@@ -14,7 +14,7 @@ Install [pre-commit](https://github.com/pre-commit/pre-commit) and add this to y
 ### As a standalone package
 If you'd like to use these hooks, they're also available as a standalone package.
 
-Simply `pip install hamilton-pre-commit-hooks`
+Simply `pip install hamilton-hooks`
 
 
 # Hooks available
@@ -39,4 +39,4 @@ Track Hamilton modules (`.py` files) and automatically generate DAG visualizatio
 Distributed under the terms of the MIT license, hamilton-pre-commit-hooks is free and open source software.
 
 # Issues
-If you encounter any problems, please [file an issue](https://github.com/zilto/hamilton-pre-commit-hooks/issues/new) along with a detailed description.
+If you encounter any problems, please [file an issue](https://github.com/zilto/hamilton-hooks/issues/new) along with a detailed description.
