@@ -1,0 +1,16 @@
+// Dependency Graph
+digraph {
+	graph [compound=true concentrate=true rankdir=LR ranksep=0.4]
+	B [label=<<b>B</b><br /><br /><i>int</i>> fillcolor="#b4d8e4" fontname=Helvetica margin=0.15 shape=rectangle style="rounded,filled"]
+	C [label=<<b>C</b><br /><br /><i>int</i>> fillcolor="#b4d8e4" fontname=Helvetica margin=0.15 shape=rectangle style="rounded,filled"]
+	A [label=<<b>A</b><br /><br /><i>int</i>> fillcolor="#b4d8e4" fontname=Helvetica margin=0.15 shape=rectangle style="rounded,filled"]
+	A -> B
+	A -> C
+	_A_inputs [label=<<table border="0"><tr><td>b</td><td>int</td></tr><tr><td>c</td><td>int</td></tr></table>> fontname=Helvetica margin=0.15 shape=rectangle style=dashed]
+	_A_inputs -> A
+	subgraph cluster__legend {
+		graph [fontname=helvetica label=Legend rank=same]
+		input [fontname=Helvetica margin=0.15 shape=rectangle style=dashed]
+		function [fillcolor="#b4d8e4" fontname=Helvetica margin=0.15 shape=rectangle style="rounded,filled"]
+	}
+}

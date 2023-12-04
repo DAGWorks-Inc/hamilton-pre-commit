@@ -26,6 +26,7 @@ Simply `pip install hamilton-pre-commit-hooks`
   args: [
     /path/to/hamilton_module_a.py,  # files to track
     /path/to/hamilton_module_b.py,
+    --dest-dir=./docs/hamilton_modules,
   ]
 ```
 

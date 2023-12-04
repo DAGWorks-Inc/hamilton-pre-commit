@@ -1,35 +1,17 @@
 import argparse
-import importlib
 from pathlib import Path
-import subprocess
-import sys
-from types import ModuleType
 from typing import Optional, Sequence
 
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
-from hamilton import driver, telemetry
+from hamilton import driver
 
-telemetry.disable_telemetry()
+from hamilton_hooks import common
 
 
 PASS = 0
 FAIL = 1
 
-
-def get_current_file_hash(file_path: Path) -> str:
-    """Call `git hash-object <filename>` in a subprocess"""
-    try:
-        return subprocess.run(
-            ['git', 'hash-object', str(file_path)],
-            stdout=subprocess.PIPE,
-            text=True,
-            check=True
-        ).stdout.strip()
-
-    except subprocess.CalledProcessError as e:
-        raise e
-    
 
 def get_visualization_file_path(
     module_path: Path, dest_dir: Optional[str] = None,
@@ -41,7 +23,7 @@ def get_visualization_file_path(
     By default, generate visualizations next to the .py file.
     """
     if dest_dir:
-        viz_path = Path(dest_dir, module_path.stem, ".png")
+        viz_path = Path(dest_dir, module_path.stem).with_suffix(".png")
     else:
         viz_path = module_path.with_suffix(".png")
     return viz_path
@@ -69,36 +51,6 @@ def check_viz_commit(file_path: Path, file_hash: str) -> bool:
     return metadata.get("file_hash") != file_hash
 
 
-def import_module(module_path: Path) -> ModuleType:
-    """Import a Python module dynamically from a file path."""
-    module_name = str(module_path.stem)
-    spec = importlib.util.spec_from_file_location(module_name, module_path)
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[module_name] = module
-    spec.loader.exec_module(module)
-    return module
-
-
-def build_driver(
-    module: ModuleType,
-    config: Optional[dict] = None,
-    allow_experimental_mode: bool = True,
-) -> driver.Driver:
-    """Build the Hamilton Driver using a single module.
-    TODO. Allow to pass `config`
-    """
-    config = dict() if config is None else config
-    return (
-        driver.Builder()
-        .enable_dynamic_execution(
-            allow_experimental_mode=allow_experimental_mode
-        )
-        .with_config(config)
-        .with_modules(module)
-        .build()
-    )
-
-
 def visualize_dag(dr: driver.Driver, file_path: Path) -> None:
     """Generate a visualization for the Driver."""
     # remove the file path extension since it will be added by graphviz
@@ -108,7 +60,7 @@ def visualize_dag(dr: driver.Driver, file_path: Path) -> None:
     )
 
 
-def main(argv: Sequence[str] | None = None) -> int:
+def main(argv: Optional[Sequence[str]] = None) -> int:
     """Generate visualization of Hamilton modules that were edited."""
     parser = argparse.ArgumentParser()
     parser.add_argument("module_paths", nargs="+", help="Hamilton modules to visualize.")
@@ -117,15 +69,18 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     exit_code = PASS
 
-    for arg in args.module_paths:
-        module_path = Path(arg)
-        module_hash = get_current_file_hash(module_path)
-        viz_path = get_visualization_file_path(module_path)
+    for m in args.module_paths:
+        module_path = Path(m)
+        module_hash = common.get_current_file_hash(file_path=module_path)
+        viz_path = get_visualization_file_path(
+            module_path=module_path, dest_dir=args.dest_dir,
+        )
         exit_code_for_file = check_viz_commit(viz_path, module_hash)
 
         if exit_code_for_file:
-            module = import_module(module_path)
-            dr = build_driver(module)
+            dr = common.build_driver(
+                module=common.import_module(module_path)
+            )
             visualize_dag(dr, viz_path)
             add_commit_metadata(viz_path, module_hash)
             print(f"Rendered `{module_path.stem}` at {viz_path.parent}")
