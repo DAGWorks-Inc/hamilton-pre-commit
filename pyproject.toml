@@ -26,7 +26,7 @@ dependencies = [
 
 [project.scripts]
 cli-command = "hamilton_hooks.cli_command:main"
-hamilton-validate-dag = "hamilton_hooks.validate_dag:main"
+view-dag = "hamilton_hooks.view_dag:main"
 
 [tool.setuptools.packages.find]
 exclude = ["tests", "tests.*", "testing", "testing.*"]

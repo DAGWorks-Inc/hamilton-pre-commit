@@ -1,24 +1,29 @@
+import sys
 import json
 import subprocess
-from typing import Optional, Sequence
 
 
 PASS = 0
 FAIL = 1
 
 
-def main(argv: Optional[Sequence[str]] = None) -> int:
+def main() -> int:
     """Execute a list of commands using the Hamilton CLI"""
     exit_code = PASS
     
-    if argv is None:
+    commands = sys.argv[1:]
+
+    if len(commands) == 0:
         print("hamilton-hooks.cli-command received no command to execute")
         return exit_code
         
-    for cmd in argv:
+    for command in commands:
         try:
-            result = subprocess.run(cmd, stdout=subprocess.PIPE, text=True)
+            args = command.split(" ")
+            args.insert(1, "--json-out")
+            result = subprocess.run(args, stdout=subprocess.PIPE, text=True)
             response = json.loads(result.stdout)
+            print(response)
             
             if response["success"] is False:
                 raise ValueError
