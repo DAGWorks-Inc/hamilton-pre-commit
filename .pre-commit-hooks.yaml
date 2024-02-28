@@ -1,15 +1,7 @@
-- id: hamilton-validate-dag
-  name: Hamilton Validate DAG
-  description: This hook validates the Hamilton DAG found in a module.
-  entry: hamilton-validate-dag
-  language: python
-  types: [python]
-  stages: [pre-commit, pre-merge-commit, manual]
-  pass_filenames: false
-- id: hamilton-view-dag
-  name: Hamilton View DAG
-  description: This hook generates a visualization of the Hamilton DAG.
-  entry: hamilton-view-dag
+- id: cli-command
+  name: Execute `hamilton` CLI command
+  description: This hook executes a command using the `hamilton` CLI.
+  entry: cli-command
   language: python
   types: [python]
   stages: [pre-commit, pre-merge-commit, manual]
