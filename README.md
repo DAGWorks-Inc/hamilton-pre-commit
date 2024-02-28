@@ -2,38 +2,24 @@
 This repository contains [pre-commit hooks](https://github.com/pre-commit/pre-commit) to improve the development experience with the open source dataflow library [Hamilton](https://github.com/dagworks-inc/hamilton).
 
 # Installation
-### Using pre-commit-hooks with pre-commit
+## Using pre-commit-hooks with pre-commit
 Install [pre-commit](https://github.com/pre-commit/pre-commit) and add this to your `.pre-commit-config.yaml`
 ```yaml
 - repo: https://github.com/zilto/hamilton-hooks
-  rev: v0.0.3  # Use the ref you want to point at
+  rev: v0.1.0  # Use the ref you want to point at
   hooks:
-    - id: hamilton-view-dag
-    # - id: ...
+    - id: cli-command
+      additional_dependencies: [sf-hamilton, graphviz, typer]
+      args: [  # a list of CLI commands passed as strings
+        "hamilton build my_functions.py",
+        "hamilton view -o my_func2.png my_func2.py",
+      ]
 ```
-### As a standalone package
+
+## As a standalone package
 If you'd like to use these hooks, they're also available as a standalone package.
 
 Simply `pip install hamilton-hooks`
-
-
-# Hooks available
-`hamilton-view-dag`
-```yaml
-- id: hamilton-view-dag
-  name: Hamilton View DAG
-  additional_dependencies: [sf-hamilton, graphviz, pillow]
-  args: [
-    /path/to/hamilton_module_a.py,  # files to track
-    /path/to/hamilton_module_b.py,
-    --dest-dir=./docs/hamilton_modules,
-  ]
-```
-
-Track Hamilton modules (`.py` files) and automatically generate DAG visualization when commiting changes to tracked files.
-- Each `.py` builds an Hamilton Driver and generates a visualization of the same file name with `.png` extension next to it.
-- Can specify a destination directory `dest_dir` where all visualizations are generated.
-
 
 # License
 Distributed under the terms of the MIT license, hamilton-pre-commit-hooks is free and open source software.
