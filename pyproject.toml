@@ -1,25 +1,33 @@
-[tool.poetry]
-name = "hamilton_hooks"
-version = "0.0.4"
-description = "pre-commit hooks for Hamilton."
-authors = ["Thierry Jean"]
-license = "MIT"
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools", "wheel"]
+
+[project]
+name = "hamilton-hooks"
+version = "0.1.0"
+description = "pre-commit hooks for Hamilton"
 readme = "README.md"
-homepage = "https://github.com/zilto/hamilton-pre-commit-hooks/"
-repository = "https://github.com/zilto/hamilton-pre-commit-hooks/"
+keywords = [
+    "pre-commit",
+    "hamilton",
+    "data-science",
+    "orchestration",
+    "developer-tools",
+    "machine-learning",
+    "mlops",
+]
+license = { text = "MIT" }
+authors = [{ name = "Thierry Jean"}]
+requires-python = ">=3.8"
+dependencies = [
+    "sf-hamilton[cli] >= 1.51",
 
-[tool.poetry.dependencies]
-python = "^3.8"
-pillow = ">=10.1.0"
-sf-hamilton = { version = ">=1.39.0", extras = ["visualization"] }
+]
 
-[tool.poetry.dev-dependencies]
-pytest = ">=7.4.3"
-
-[tool.poetry.scripts]
-hamilton-view-dag = "hamilton_hooks.view_dag:main"
+[project.scripts]
+cli-command = "hamilton_hooks.cli_command:main"
 hamilton-validate-dag = "hamilton_hooks.validate_dag:main"
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+[tool.setuptools.packages.find]
+exclude = ["tests", "tests.*", "testing", "testing.*"]
+namespaces = false
