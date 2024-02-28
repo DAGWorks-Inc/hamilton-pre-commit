@@ -16,18 +16,16 @@ keywords = [
     "machine-learning",
     "mlops",
 ]
-license = { text = "MIT" }
+license = LICENSE
 authors = [{ name = "Thierry Jean"}]
 requires-python = ">=3.8"
 dependencies = [
     "sf-hamilton[cli] >= 1.51",
-
 ]
 
 [project.scripts]
 cli-command = "hamilton_hooks.cli_command:main"
-view-dag = "hamilton_hooks.view_dag:main"
 
 [tool.setuptools.packages.find]
-exclude = ["tests", "tests.*", "testing", "testing.*"]
+exclude = ["tests", "tests.*"]
 namespaces = false

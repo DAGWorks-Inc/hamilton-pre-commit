@@ -1,11 +1,3 @@
-- id: view-dag
-  name: Hamilton View DAG
-  description: This hook generates a visualization of the Hamilton DAG.
-  entry: view-dag
-  language: python
-  types: [python]
-  stages: [pre-commit, pre-merge-commit, manual]
-  pass_filenames: false
 - id: cli-command
   name: Execute `hamilton` CLI command
   description: This hook executes a command using the `hamilton` CLI.
