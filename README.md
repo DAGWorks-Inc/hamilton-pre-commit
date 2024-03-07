@@ -11,7 +11,6 @@ Install [pre-commit](https://github.com/pre-commit/pre-commit) and add this to y
   hooks:
   - id: cli-command
     name: Hamilton CLI command
-    additional_dependencies: ["sf-hamilton[visualization,cli]"]
     args: [
       hamilton build my_module.py,  # commands to execute
       hamilton build my_module2.py,  # they are executed in order
