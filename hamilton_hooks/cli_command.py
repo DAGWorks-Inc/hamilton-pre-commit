@@ -14,12 +14,14 @@ def main() -> int:
     commands = sys.argv[1:]
 
     if len(commands) == 0:
-        print("hamilton-hooks.cli-command received no command to execute")
+        print("`hamilton-hooks.cli-command` received no command to execute")
         return exit_code
         
     for command in commands:
         try:
             args = command.split(" ")
+            # insert `--json-out` right after `hamilton` for proper stdout parsing
+            # no issue if `--json-out` is present twice
             args.insert(1, "--json-out")
             result = subprocess.run(args, stdout=subprocess.PIPE, text=True)
             response = json.loads(result.stdout)
