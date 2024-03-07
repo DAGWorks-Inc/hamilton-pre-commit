@@ -1,5 +1,5 @@
 - id: cli-command
-  name: Execute `hamilton` CLI command
+  name: Execute `hamilton` CLI commands
   description: This hook executes a command using the `hamilton` CLI.
   entry: cli-command
   language: python

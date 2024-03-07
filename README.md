@@ -6,37 +6,34 @@ This repository contains [pre-commit hooks](https://github.com/pre-commit/pre-co
 Install [pre-commit](https://github.com/pre-commit/pre-commit) and add this to your `.pre-commit-config.yaml`
 ```yaml
 - repo: https://github.com/zilto/hamilton-hooks
-  rev: v0.0.3  # Use the ref you want to point at
+  rev: v0.1.1  # use a ref >= 0.1.0 
   hooks:
-    - id: hamilton-view-dag
+    - id: cli-command
     # - id: ...
 ```
-### As a standalone package
-If you'd like to use these hooks, they're also available as a standalone package.
 
-Simply `pip install hamilton-hooks`
+### Using the CLI manually
+If you are interested in the command line tool, use `pip install sf-hamilton[cli]` and see the main [Hamilton repository](https://github.com/dagworks-inc/hamilton).
 
 
 # Hooks available
-`hamilton-view-dag`
+`cli-command`
 ```yaml
-- id: hamilton-view-dag
-  name: Hamilton View DAG
-  additional_dependencies: [sf-hamilton, graphviz, pillow]
+- id: cli-command
+  name: Hamilton CLI command
+  additional_dependencies: ["sf-hamilton[visualization,cli]"]
   args: [
-    /path/to/hamilton_module_a.py,  # files to track
-    /path/to/hamilton_module_b.py,
-    --dest-dir=./docs/hamilton_modules,
+    hamilton build my_module.py,  # commands to execute
+    hamilton build my_module2.py,  # they are executed in order
+    hamilton validate --context config.json my_module.py my_module2.py,  # exits on the first failure
   ]
 ```
 
-Track Hamilton modules (`.py` files) and automatically generate DAG visualization when commiting changes to tracked files.
-- Each `.py` builds an Hamilton Driver and generates a visualization of the same file name with `.png` extension next to it.
-- Can specify a destination directory `dest_dir` where all visualizations are generated.
+You can specify `hamilton` CLI commands to execute in a list. The hook will execute them in order. It's most useful with `hamilton build` to check for valid Hamilton syntax and `hamilton validate` to verify a specific dataflow path. More thorough validation should be done using tests given pre-commits are meant to be lightweight.
 
 
 # License
-Distributed under the terms of the MIT license, hamilton-pre-commit-hooks is free and open source software.
+Distributed under the terms of the MIT license, `hamilton-pre-commit-hooks` is free and open source software.
 
 # Issues
 If you encounter any problems, please [file an issue](https://github.com/zilto/hamilton-hooks/issues/new) along with a detailed description.

@@ -4,7 +4,7 @@ requires = ["setuptools", "wheel"]
 
 [project]
 name = "hamilton-hooks"
-version = "0.1.0"
+version = "0.1.1"
 description = "pre-commit hooks for Hamilton"
 readme = "README.md"
 keywords = [
