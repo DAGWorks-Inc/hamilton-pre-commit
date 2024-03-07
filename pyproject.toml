@@ -20,7 +20,7 @@ license = { file = "LICENSE" }
 authors = [{ name = "Thierry Jean"}]
 requires-python = ">=3.8"
 dependencies = [
-    "sf-hamilton[cli] >= 1.51",
+    "sf-hamilton[cli]>=1.51",
 ]
 
 [project.scripts]
