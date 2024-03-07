@@ -7,7 +7,7 @@ Install [pre-commit](https://github.com/pre-commit/pre-commit) and add this to y
 
 ```yaml
 - repo: https://github.com/zilto/hamilton-hooks
-  rev: v0.1.1  # use a ref >= 0.1.0 
+  rev: v0.1.2  # use a ref >= 0.1.2 
   hooks:
   - id: cli-command
     name: Hamilton CLI command
