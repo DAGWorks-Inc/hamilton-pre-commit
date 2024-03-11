@@ -6,8 +6,8 @@ This repository contains [pre-commit hooks](https://github.com/pre-commit/pre-co
 Install [pre-commit](https://github.com/pre-commit/pre-commit) and add this to your `.pre-commit-config.yaml`
 
 ```yaml
-- repo: https://github.com/zilto/hamilton-hooks
-  rev: v0.1.2  # use a ref >= 0.1.2 
+- repo: https://github.com/dagworks-inc/hamilton-pre-commit
+  rev: v0.1.3  # use a ref >= 0.1.3
   hooks:
   - id: cli-command
     name: Hamilton CLI command
@@ -24,7 +24,7 @@ You can specify `hamilton` CLI commands to execute in a list. The hook will exec
 If you are interested in the command line tool, use `pip install sf-hamilton[cli]` and see the main [Hamilton repository](https://github.com/dagworks-inc/hamilton).
 
 # License
-Distributed under the terms of the MIT license, `hamilton-pre-commit-hooks` is free and open source software.
+Distributed under the terms of the MIT license, `hamilton-pre-commit` is free and open source software.
 
 # Issues
-If you encounter any problems, please [file an issue](https://github.com/zilto/hamilton-hooks/issues/new) along with a detailed description.
+If you encounter any problems, please [file an issue](https://github.com/dagworks-inc/hamilton-pre-commit/issues/new) along with a detailed description.

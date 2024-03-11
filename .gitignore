@@ -3,3 +3,4 @@
 .vscode/
 *.egg-info/
 venv/
+.python-version
